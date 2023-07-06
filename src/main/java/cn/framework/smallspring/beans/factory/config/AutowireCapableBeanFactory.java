@@ -1,4 +1,6 @@
 package cn.framework.smallspring.beans.factory.config;
 
-public interface AutowireCapableBeanFactory {
+import cn.framework.smallspring.beans.factory.BeanFactory;
+
+public interface AutowireCapableBeanFactory extends BeanFactory {
 }

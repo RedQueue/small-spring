@@ -1,6 +1,6 @@
 package cn.framework.smallspring.beans.factory.config;
 
-//类引用
+//bean的引用
 public class BeanReference {
     private String beanName;
 

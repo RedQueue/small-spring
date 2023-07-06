@@ -5,39 +5,33 @@ import cn.framework.smallspring.beans.BeansException;
 import cn.framework.smallspring.beans.factory.config.BeanDefinition;
 
 // 抽象类定义模版方法
+// BeanDefinition注册表接口
 public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegister implements BeanFactory{
     @Override
     public Object getBean(String name) throws BeansException {
-        Object bean = getSingleton(name);
-        if (bean != null) {
-            return bean;
-        }
-
-        BeanDefinition beanDefinition = getBeanDefinition(name);
-        return createBean(name, beanDefinition, null);
+        return doGetBean(name, null);
     }
 
     @Override
     public Object getBean(String name, Object... args) throws BeansException {
-        Object bean = getSingleton(name);
-        if (bean != null) {
-            return bean;
-        }
-
-        BeanDefinition beanDefinition = getBeanDefinition(name);
-        return createBean(name, beanDefinition, args);
+        return doGetBean(name, args);
     }
 
     @Override
     public <T> T getBean(String name, Class<T> requiredType) throws BeansException {
+        return (T) getBean(name);
+    }
+
+    protected <T> T doGetBean(final String name, final Object[] args) throws BeansException {
         Object bean = getSingleton(name);
         if (bean != null) {
             return (T) bean;
         }
 
         BeanDefinition beanDefinition = getBeanDefinition(name);
-        return (T) createBean(name, beanDefinition, null);
+        return (T) createBean(name, beanDefinition, args);
     }
+
 
     protected abstract BeanDefinition getBeanDefinition(String beanName) throws BeansException;
 

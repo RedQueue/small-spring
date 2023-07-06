@@ -23,11 +23,11 @@ public class populationBeanTest {
         propertyValues.addPropertyValue(new PropertyValue("userDao", new BeanReference("userDao")));
 
         //4.UserService 注入 bean
-        BeanDefinition beanDefinition = new BeanDefinition(UserService1.class, propertyValues);
+        BeanDefinition beanDefinition = new BeanDefinition(UserService.class, propertyValues);
         beanFactory.registerBeanDefinition("userService", beanDefinition);
 
         //5.UserService 获取 bean
-        UserService1 userService = (UserService1) beanFactory.getBean("userService");
+        UserService userService = (UserService) beanFactory.getBean("userService");
         userService.queryUserInfo();
     }
 }

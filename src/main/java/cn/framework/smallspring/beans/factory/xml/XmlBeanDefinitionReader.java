@@ -91,7 +91,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                 beanDefinition.getPropertyValues().addPropertyValue(propertyValue);
             }
 
-            if (getRegistry().containsBeanDefinition(beanDefinition)) {
+            if (getRegistry().containsBeanDefinition(beanName)) {
                 throw new ClassNotFoundException("Duplicate beanName[" + beanName + "] is not allowed");
             }
             //注册BeanDefinition
