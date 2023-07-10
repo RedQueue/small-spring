@@ -32,4 +32,11 @@ public class ApiTest {
 //        UserService userService_singleton = (UserService) beanFactory.getBean("userService", "笑话111");
 //        userService_singleton.queryUserInfo();
     }
+
+    public static void main(String[] args) {
+        System.out.println("1");
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("close！")));
+        System.out.println("2");
+
+    }
 }

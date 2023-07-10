@@ -4,5 +4,10 @@
     <bean id="userService" class="cn.framework.smallspring.bean.UserService">
         <property name="uId" value="101"/>
         <property name="userDao" ref="userDao"/>
+        <property name="company" value="腾讯"/>
+        <property name="location" value="深圳"/>
     </bean>
+
+    <bean class="cn.framework.smallspring.common.MyBeanFactoryPostProcessor"/>
+    <bean class="cn.framework.smallspring.common.MyBeanPostProcessor"/>
 </beans>
