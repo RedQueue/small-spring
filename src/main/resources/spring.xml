@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-    <bean id="userDao" class="cn.framework.smallspring.bean.UserDao"/>
+    <bean id="userDao" class="cn.framework.smallspring.bean.UserDao" init-method="initDataMethod" destroy-method="destroyDataMethod" />
     <bean id="userService" class="cn.framework.smallspring.bean.UserService">
         <property name="uId" value="101"/>
         <property name="userDao" ref="userDao"/>
