@@ -8,6 +8,6 @@
         <property name="location" value="深圳"/>
     </bean>
 
-    <bean class="cn.framework.smallspring.common.MyBeanFactoryPostProcessor"/>
-    <bean class="cn.framework.smallspring.common.MyBeanPostProcessor"/>
+<!--    <bean class="cn.framework.smallspring.common.MyBeanFactoryPostProcessor"/>-->
+<!--    <bean class="cn.framework.smallspring.common.MyBeanPostProcessor"/>-->
 </beans>

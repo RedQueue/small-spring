@@ -4,14 +4,19 @@ import cn.framework.smallspring.beans.BeansException;
 import cn.framework.smallspring.beans.factory.config.BeanDefinition;
 import cn.framework.smallspring.beans.factory.config.BeanPostProcessor;
 import cn.framework.smallspring.beans.factory.config.ConfigurableBeanFactory;
+import cn.framework.smallspring.utils.ClassUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// 抽象类定义模版方法
-// BeanDefinition注册表接口
+/**
+ * 抽象类定义模版方法
+ * BeanDefinition注册表接口
+ */
 public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegister implements ConfigurableBeanFactory {
     private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<BeanPostProcessor>();
+
+    private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
 
     @Override
     public Object getBean(String name) throws BeansException {
@@ -51,5 +56,9 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegister i
 
     public List<BeanPostProcessor> getBeanPostProcessors() {
         return this.beanPostProcessors;
+    }
+
+    public ClassLoader getBeanClassLoader() {
+        return this.beanClassLoader;
     }
 }

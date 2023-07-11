@@ -3,8 +3,7 @@ package cn.framework.smallspring.beans.factory.support;
 import cn.framework.smallspring.beans.BeansException;
 import cn.framework.smallspring.beans.PropertyValue;
 import cn.framework.smallspring.beans.PropertyValues;
-import cn.framework.smallspring.beans.factory.DisposableBean;
-import cn.framework.smallspring.beans.factory.InitializingBean;
+import cn.framework.smallspring.beans.factory.*;
 import cn.framework.smallspring.beans.factory.config.AutowireCapableBeanFactory;
 import cn.framework.smallspring.beans.factory.config.BeanDefinition;
 import cn.framework.smallspring.beans.factory.config.BeanPostProcessor;
@@ -94,6 +93,19 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     }
 
     private Object initializeBean(String beanName, Object bean, BeanDefinition beanDefinition) throws BeansException {
+
+        if (bean instanceof Aware) {
+            if (bean instanceof BeanFactoryAware) {
+                ((BeanFactoryAware) bean).setBeanFactory(this);
+            }
+            if (bean instanceof BeanClassLoaderAware) {
+                ((BeanClassLoaderAware) bean).setBeanClassLoader(getBeanClassLoader());
+            }
+            if (bean instanceof BeanNameAware) {
+                ((BeanNameAware) bean).setBeanName(beanName);
+            }
+        }
+
         // 1.执行 BeanPostProcessor 前置处理
         Object wrappedBean = applyBeanPostProcessorsBeforeInitialization(bean, beanName);
         // 2.执行 Bean 初始化方法

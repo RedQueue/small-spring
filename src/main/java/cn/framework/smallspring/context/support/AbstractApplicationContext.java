@@ -9,7 +9,9 @@ import cn.framework.smallspring.core.io.DefaultResourceLoader;
 
 import java.util.Map;
 
-//应用上下文抽象类实现
+/**
+ * 应用上下文抽象类实现
+ */
 public abstract class AbstractApplicationContext extends DefaultResourceLoader implements ConfigurableApplicationContext {
     @Override
     public void refresh() throws BeansException {
@@ -17,11 +19,13 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         refreshBeanFactory();
         // 2.获取 BeanFactory
         ConfigurableListableBeanFactory beanFactory = getBeanFactory();
-        // 3.在 Bean 实例化之前，执行 BeanFactoryPostProcessor
+        // 3.添加 ApplicationContextAwareProcessor, 让继承自 ApplicationContextAware 的 Bean 对象都能感知所属的 ApplicationContext
+        beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
+        // 4.在 Bean 实例化之前，执行 BeanFactoryPostProcessor
         invokeBeanFactoryPostProcessors(beanFactory);
-        // 4.BeanPostProcessor 需求提前在其他 Bean 对象实例化之前执行注册操作
+        // 5.BeanPostProcessor 需求提前在其他 Bean 对象实例化之前执行注册操作
         registerBeanPostProcessors(beanFactory);
-        // 5.提前实例化单例 Bean 对象
+        // 6.提前实例化单例 Bean 对象
         beanFactory.preInstantiateSingletons();
     }
 

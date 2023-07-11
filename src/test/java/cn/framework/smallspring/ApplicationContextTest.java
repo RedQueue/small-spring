@@ -7,6 +7,8 @@ import cn.framework.smallspring.beans.factory.xml.XmlBeanDefinitionReader;
 import cn.framework.smallspring.common.MyBeanFactoryPostProcessor;
 import cn.framework.smallspring.common.MyBeanPostProcessor;
 import cn.framework.smallspring.context.support.ClassPathXmlApplicationContext;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ApplicationContextTest {
@@ -43,5 +45,17 @@ public class ApplicationContextTest {
         UserService userService = applicationContext.getBean("userService", UserService.class);
         String result = userService.queryUserInfo();
         System.out.println("测试结果：" + result);
+        System.out.println("ApplicationContextAware："+userService.getApplicationContext());
+        System.out.println("BeanFactoryAware："+userService.getBeanFactory());
+    }
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("hello");
+    }
+
+    @AfterAll
+    static void afterAll() {
+        System.out.println("over");
     }
 }
