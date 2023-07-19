@@ -1,6 +1,5 @@
 package cn.framework.smallspring.context.support;
 
-import cn.framework.smallspring.beans.BeansException;
 import cn.framework.smallspring.beans.factory.support.DefaultListableBeanFactory;
 import cn.framework.smallspring.beans.factory.xml.XmlBeanDefinitionReader;
 
@@ -11,11 +10,7 @@ public abstract class AbstractXmlApplicationContext extends AbstractRefreshableA
         XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory, this);
         String[] configLocations = getConfigLocations();
         if (null != configLocations) {
-            try {
-                beanDefinitionReader.loadBeanDefinitions(configLocations);
-            } catch (BeansException e) {
-                throw new RuntimeException("load BeanDefinition is not ok !");
-            }
+            beanDefinitionReader.loadBeanDefinitions(configLocations);
         }
     }
 
