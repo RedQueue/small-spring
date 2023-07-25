@@ -8,14 +8,18 @@
 <!--        <property name="location" value="深圳"/>-->
 <!--    </bean>-->
 
-    <bean id="newUserService" class="cn.framework.smallspring.bean.NewUserService" scope="prototype">
-        <property name="uId" value="101"/>
-        <property name="company" value="腾讯"/>
-        <property name="location" value="深圳"/>
-        <property name="userDao" ref="proxyUserDao"/>
-    </bean>
-    <bean id="proxyUserDao" class="cn.framework.smallspring.bean.ProxyBeanFactory"/>
+<!--    <bean id="newUserService" class="cn.framework.smallspring.bean.NewUserService" scope="prototype">-->
+<!--        <property name="uId" value="101"/>-->
+<!--        <property name="company" value="腾讯"/>-->
+<!--        <property name="location" value="深圳"/>-->
+<!--        <property name="userDao" ref="proxyUserDao"/>-->
+<!--    </bean>-->
+<!--    <bean id="proxyUserDao" class="cn.framework.smallspring.bean.ProxyBeanFactory"/>-->
 
     <!--    <bean class="cn.framework.smallspring.common.MyBeanFactoryPostProcessor"/>-->
 <!--    <bean class="cn.framework.smallspring.common.MyBeanPostProcessor"/>-->
+
+    <bean class="cn.framework.smallspring.event.CustomEventListener"/>
+    <bean class="cn.framework.smallspring.event.ContextRefreshedEventListener"/>
+    <bean class="cn.framework.smallspring.event.ContextClosedEventListener"/>
 </beans>

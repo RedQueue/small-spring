@@ -6,7 +6,7 @@ import cn.framework.smallspring.beans.factory.FactoryBean;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class FactoryBeanRegistrySupport extends DefaultSingletonBeanRegister {
+public class FactoryBeanRegistrySupport extends DefaultSingletonBeanRegistry {
     private final Map<String, Object> factoryBeanObjectCache = new ConcurrentHashMap<>();
 
     protected Object getCachedObjectForFactoryBean(String beanName) {

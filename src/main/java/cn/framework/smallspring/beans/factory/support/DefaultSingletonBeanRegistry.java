@@ -2,14 +2,14 @@ package cn.framework.smallspring.beans.factory.support;
 
 import cn.framework.smallspring.beans.BeansException;
 import cn.framework.smallspring.beans.factory.DisposableBean;
-import cn.framework.smallspring.beans.factory.config.SingletonBeanRegister;
+import cn.framework.smallspring.beans.factory.config.SingletonBeanRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 //单例注册接口实现
-public class DefaultSingletonBeanRegister implements SingletonBeanRegister {
+public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
     protected static final Object NULL_OBJECT = new Object();
     private Map<String, Object> singletonObjects = new HashMap<>();
     private final Map<String, DisposableBean> disposableBeans = new HashMap<>();
@@ -17,6 +17,10 @@ public class DefaultSingletonBeanRegister implements SingletonBeanRegister {
     @Override
     public Object getSingleton(String beanName) {
         return singletonObjects.get(beanName);
+    }
+
+    public void registerSingleton(String beanName, Object singletonObject) {
+        singletonObjects.put(beanName, singletonObject);
     }
 
     //受保护的方法，可以被继承此类的子类调用
@@ -28,7 +32,6 @@ public class DefaultSingletonBeanRegister implements SingletonBeanRegister {
         disposableBeans.put(beanName, bean);
     }
 
-    @Override
     public void destroySingletons() {
         Set<String> keySet = this.disposableBeans.keySet();
         Object[] disposableBeanNames = keySet.toArray();
