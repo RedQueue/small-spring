@@ -19,7 +19,23 @@
     <!--    <bean class="cn.framework.smallspring.common.MyBeanFactoryPostProcessor"/>-->
 <!--    <bean class="cn.framework.smallspring.common.MyBeanPostProcessor"/>-->
 
-    <bean class="cn.framework.smallspring.event.CustomEventListener"/>
-    <bean class="cn.framework.smallspring.event.ContextRefreshedEventListener"/>
-    <bean class="cn.framework.smallspring.event.ContextClosedEventListener"/>
+<!--    <bean class="cn.framework.smallspring.event.CustomEventListener"/>-->
+<!--    <bean class="cn.framework.smallspring.event.ContextRefreshedEventListener"/>-->
+<!--    <bean class="cn.framework.smallspring.event.ContextClosedEventListener"/>-->
+
+
+    <bean id="userService" class="cn.framework.smallspring.aop.UserService12"/>
+
+    <bean class="cn.framework.smallspring.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+    <bean id="beforeAdvice" class="cn.framework.smallspring.aop.UserServiceBeforeAdvice"/>
+
+    <bean id="methodInterceptor" class="cn.framework.smallspring.aop.framework.adapter.MethodBeforeAdviceInterceptor">
+        <property name="advice" ref="beforeAdvice"/>
+    </bean>
+
+    <bean id="pointcutAdvisor" class="cn.framework.smallspring.aop.aspectj.AspectJExpressionPointcutAdvisor">
+        <property name="expression" value="execution(* cn.framework.smallspring.aop.IUserService.*(..))"/>
+        <property name="advice" ref="methodInterceptor"/>
+    </bean>
 </beans>

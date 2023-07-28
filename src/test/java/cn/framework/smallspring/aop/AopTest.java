@@ -4,6 +4,7 @@ import cn.framework.smallspring.aop.aspectj.AspectJExpressionPointcut;
 import cn.framework.smallspring.aop.framework.Cglib2AopProxy;
 import cn.framework.smallspring.aop.framework.JdkDynamicAopProxy;
 import cn.framework.smallspring.aop.framework.ReflectiveMethodInvocation;
+import cn.framework.smallspring.context.support.ClassPathXmlApplicationContext;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ public class AopTest {
     }
 
     @Test
-    public void test_aop() throws NoSuchMethodException {
+    public void test_aop_pointcut() throws NoSuchMethodException {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut("execution(* cn.framework.smallspring.aop.UserService12.*(..))");
         Class<UserService12> clazz = UserService12.class;
         Method method = clazz.getDeclaredMethod("queryUserInfo");
@@ -86,5 +87,12 @@ public class AopTest {
         IUserService proxy_cglib = (IUserService) new Cglib2AopProxy(advisedSupport).getProxy();
         // 测试调用
         System.out.println("测试结果：" + proxy_cglib.register("花花"));
+    }
+
+    @Test
+    public void test_aop() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        IUserService userService = applicationContext.getBean("userService", IUserService.class);
+        System.out.println("测试结果：" + userService.queryUserInfo());
     }
 }
